@@ -1,97 +1,74 @@
-const Comments = {
-
-	/** Объекты */
-	ajax: null,
-
-	/** Селекторы */
-	selectors: {
-		form:   '#commentForm',
-		show: 	'#showComments',
-		msg: 	'#text-message'
-	},
-
-	/** Сообщения */
-	messages: {
-		success: 'Comment posted Successfully.',
-		error:   'Error: Comment not posted. ++'
-	},
-
-	/** Методы */
-	methods: {
-		/**
-		 * функция для отображения добавленных комментариев
-		 */
-		showComments()	{
-
-			Comments.ajax = $.ajax({
-
-				url: "/comments/items",
-				method: "POST",
-
-				success:function(response) {
-					$(Comments.selectors.show).html(response);
-				}
-
-			}).always(function () {
-				Comments.ajax = null;
-			});
+/* Компонент VueJS Раздела Комментарии*/
+let comn = new Vue({
+	el: '#comments',
+	data: {
+		
+		items:  [],
+		errors: [],
+		status: {},
+		
+		// Свойства комментариев
+		comments: {
+			name:  '',
+			email: '',
+			title: '',
+			text:  ''
 		}
-
 	},
-
-	/** Обработчики */
-	handlers() {
-		/**
-		 * Отпраить данные на добавление коментария
-		 */
-		$(Comments.selectors.form).on('submit', function(event) {
-
-			event.preventDefault();
-			formData = $(this).serialize();
-
-			Comments.ajax = $.ajax({
-
-				url: "/comments/create",
-				method: "POST",
-				data: formData,
-				dataType: "JSON",
-
-				success: function(response) {
-					
-					if(!response.error) {
-						
-						$(Comments.selectors.form)[0].reset();
-						$(Comments.selectors.msg).html(Comments.messages.success);
-						$(Comments.selectors.msg).attr('class','text-success');
-						
-						Comments.methods.showComments();
-					}else{
-						
-						msg = '';
-						Object.entries(response.message).forEach(function(entry) {							
-						msg += entry[1] + "<br>"; });
-
-						$(Comments.selectors.msg).html(msg);
-						$(Comments.selectors.msg).attr('class','text-danger');
-					}
-				},
-
-				error: function() {
-					$(Comments.selectors.msg).html(Comments.messages.error);
-				}
-
-			}).always(function () {
-				Comments.ajax = null;
-			});
-		});
+	
+	// Автозапуск
+	mounted: function() {
+		this.showComments();
 	},
+	
+	// Методы для обработки данных
+    methods: {
+        sendIdentity: function() {
+			
+            let personForm = comn.toFormData(comn.comments);
 
-	/** Инициализация */
-	init() {
-		Comments.handlers();
-	}
-}
+				// Ajax запрос на добавление коминтариев
+				axios.post('/comments/create', personForm)
+					.then(function(response) {
+						
+						comn.errors = [];
+						
+						// В случае успеха отобразить комментарий в списке
+						if (!response.data.error) {
 
-$(document).ready(function () {
-	Comments.init();
+							comn.items.unshift(comn.comments);
+							comn.comments = {};
+							comn.errors.unshift({message: 'Comment posted Successfully.'});
+							comn.status = 'text-success';
+						
+						// Иначе вывести информацию обработчика полей
+						} else {
+							err = response.data.message;
+
+							Object.entries(err).forEach(function(entry) {
+								comn.errors.unshift({message: entry[1]});
+							});
+							comn.status = 'text-danger';
+						}
+                })
+        },
+		
+		// Получить данные из формы добавление коминтариев
+        toFormData: function(obj) {
+            let formData = new FormData();
+			
+            for(let key in obj) {
+                formData.append(key, obj[key]);
+            }
+            return formData;
+        },
+
+		// Отображение уже созданных коминтариев
+		showComments: function() {
+			axios.get('/comments/ajax')
+				.then( function(response) {
+					comn.items = response.data;
+				})
+        }
+    }
 });

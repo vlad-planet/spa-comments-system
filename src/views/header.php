@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/web/css/style.css">
 	
-	<!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<!-- Vue -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>

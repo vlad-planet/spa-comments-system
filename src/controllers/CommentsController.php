@@ -11,7 +11,6 @@ class CommentsController extends Controller
 {
 	/**
      * Индексная страница
-	 * @return mixed
      */
 	public function actionIndex()
 	{
@@ -31,7 +30,7 @@ class CommentsController extends Controller
      * Добавление комментария
 	 * @return bool
      */
-	public function actionCreate() : bool
+	public function actionCreate()
 	{
 		// Передаваеммые параметры
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -67,7 +66,6 @@ class CommentsController extends Controller
 
 	/**
      * Список комментариев
-	 * @return mixed
      */
 	public function actionItems()
 	{
@@ -81,5 +79,18 @@ class CommentsController extends Controller
 
 		return $this->generate('comments/items.php', '_blank.php', $data);
 	}
+	
+	
+	/**
+     * Список комментариев для запроса Ajax Vue
+     */
+	public function actionAjax()
+	{
+		$model = new Comments();
+		
+		$items = $model->getAll();
 
+		echo (json_encode($items));
+	}
+	
 }

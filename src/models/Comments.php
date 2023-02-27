@@ -29,7 +29,7 @@ class Comments extends Model
     public function rules() : array
     {
 		return [
-			'name'  => 'required, max:40',
+			'name'  => 'required | max:40',
 			'email' => 'required | email | unique: comments,email',
 			'title' => 'required | min: 10, max:255',
 			'text'  => 'required | min: 10, max:255'
