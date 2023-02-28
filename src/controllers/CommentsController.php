@@ -11,8 +11,9 @@ class CommentsController extends Controller
 {
 	/**
      * Индексная страница
+     * @return void
      */
-	public function actionIndex()
+	public function actionIndex() : void
 	{
 		$model = new Comments();
 		$items = $model->getAll(); // получаем все строки
@@ -23,14 +24,14 @@ class CommentsController extends Controller
 			'info' => $info
 		];
 
-		return $this->generate('comments/index.php', 'template.php', $data);
+		$this->generate('comments/index.php', 'template.php', $data);
 	}
 
 	/**
      * Добавление комментария
 	 * @return bool
      */
-	public function actionCreate()
+	public function actionCreate() : bool
 	{
 		// Передаваеммые параметры
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -66,8 +67,9 @@ class CommentsController extends Controller
 
 	/**
      * Список комментариев
+     * @return void
      */
-	public function actionItems()
+	public function actionItems() : void
 	{
 		$model = new Comments();
 		
@@ -77,7 +79,7 @@ class CommentsController extends Controller
 			'items' => $items
 		];
 
-		return $this->generate('comments/items.php', '_blank.php', $data);
+		$this->generate('comments/items.php', '_blank.php', $data);
 	}
 	
 	

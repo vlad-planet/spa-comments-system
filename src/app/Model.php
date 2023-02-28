@@ -2,13 +2,14 @@
 namespace App;
 
 use PDO;
+use PDOException;
 use App;
 use Services\Validators;
 
 // Основная модель для работы с БД
 Abstract class Model
 {
-	/** @var obj PDO */
+	/** @var object obj PDO */
     protected object $db;
 	
 	/** @var string */
@@ -110,7 +111,7 @@ Abstract class Model
 			
 		}catch(PDOException $e) {
 			echo 'Error : '.$e->getMessage();
-			return false;
+			exit;
 		}
 		return $rows;
 	}

@@ -39,7 +39,7 @@ class Validators{
 		$rule_messages = array_filter($messages, fn($message) => is_string($message));
 		
 		// Перезаписать сообщение по умолчанию
-		$validation_errors = array_merge(Self::DEFAULT_VALIDATION_ERRORS, $rule_messages);
+		$validation_errors = array_merge(Validators::DEFAULT_VALIDATION_ERRORS, $rule_messages);
 
 		$errors = [];
 

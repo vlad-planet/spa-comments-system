@@ -10,17 +10,19 @@ class MainController extends Controller
 {
 	/**
      * Индексная страница
+     * @return void
      */
-	public function actionIndex()
+	public function actionIndex() : void
 	{
-		return $this->generate('main/index.php', 'template.php');
+		$this->generate('main/index.php', 'template.php');
 	}
 	
 	/**
      * Страница об ошибке
+     * @return void
      */
-	public function actionError()
+	public function actionError() : void
 	{
-		return $this->generate('404_view.php', 'template.php');
+		$this->generate('404_view.php', 'template.php');
 	}
 }
