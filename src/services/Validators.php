@@ -10,15 +10,15 @@ class Validators{
 
 	// Параметры правил ограничений
 	public const DEFAULT_VALIDATION_ERRORS = [
-		'required' => 'Please enter the %s',
-		'email' => 'The %s is not a valid email address',
-		'min' => 'The %s must have at least %s characters',
-		'max' => 'The %s must have at most %s characters',
-		'between' => 'The %s must have between %d and %d characters',
-		'same' => 'The %s must match with %s',
-		'alphanumeric' => 'The %s should have only letters and numbers',
-		'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
-		'unique' => 'The %s already exists',
+		'required' => 'Пожалуйста, введите %s',
+		'email' => '%s не является действительным адресом электронной почты',
+		'min' => 'В %s должно быть не менее символов %s',
+		'max' => 'В %s должно быть от %d до %d символов',
+		'between' => 'В %s должно быть от %d до %d символов',
+		'same' => '%s должно совпадать с %s',
+		'alphanumeric' => 'В %s должны быть только буквы и цифры',
+		'secure' => '%s должен содержать от 8 до 64 символов и содержать по крайней мере одну цифру, одну заглавную букву, одну строчную букву и один специальный символ',
+		'unique' => '%s уже существует',
 	];
 
 	/**
