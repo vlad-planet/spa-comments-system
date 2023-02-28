@@ -12,7 +12,8 @@ let comn = new Vue({
 			name:  '',
 			email: '',
 			title: '',
-			text:  ''
+			text:  '',
+			date:  ''
 		}
 	},
 	
