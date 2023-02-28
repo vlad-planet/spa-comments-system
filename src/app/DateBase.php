@@ -7,8 +7,8 @@ use PDO;
  */
 class DateBase
 {
-	/** @var obj PDO() */
-    public $pdo;
+	/** @var object PDO() */
+    public object $pdo;
     
 	// Подготовить соеденение с БД
     public function __construct()
@@ -18,7 +18,8 @@ class DateBase
 	}
     
 	// Настройки подключения
-    protected function getPDOSettings()
+    // @return array
+    protected function getPDOSettings() : array
     {
         $config = include ROOTPATH.DIRECTORY_SEPARATOR.'Config'.DIRECTORY_SEPARATOR.'db.php';
         $result['dsn'] = "{$config['type']}:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}";

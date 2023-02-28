@@ -1,3 +1,7 @@
+<?php
+/* @var $data  \controllers\CommentsController (actionIndex) */
+?>
+
 <div id="comments" class="container">
 	<h2>SPA веб-сайт с простой системой комментирования.</h2>
 

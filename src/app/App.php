@@ -4,14 +4,14 @@
  */
 class App
 {
-    /** @var obj App\Router() */    
-    public static $router;
+    /** @var object App\Router() */
+    public static object $router;
 	
-	/** @var obj App\Kernel() */
-    public static $kernel;
+	/** @var object App\Kernel() */
+    public static object $kernel;
 	
-	/** @var obj App\DateBase() */
-	public static $db;
+	/** @var object App\DateBase() */
+	public static object $db;
 
 	// Инициализация класса
     public static function init() : void

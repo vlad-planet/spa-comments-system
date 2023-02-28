@@ -9,10 +9,10 @@ use App;
 class Kernel 
 {
 	// Контроллер по умолчанию
-    public $defaultControllerName = 'CommentsController'; // MainController
+    public string $defaultControllerName = 'CommentsController'; // MainController
     
 	// Екшен по умолчанию
-    public $defaultActionName = "actionIndex";
+    public string $defaultActionName = "actionIndex";
 	
 	/**
      * Подключения запрашиваемого контроллера и экшена
@@ -70,7 +70,7 @@ class Kernel
      */
 	public static function ErrorPage404() : void
 	{
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        $host = $_SERVER['HTTP_HOST'].'/';
 		header('Location:'.$host.'main/error');
     }
 }
