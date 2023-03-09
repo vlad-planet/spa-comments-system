@@ -45,7 +45,6 @@ class Validators{
 
 		// Итерация полученных правил ограничений
 		foreach ($fields as $field => $option) {
-
 			$rules = $split($option, '|');
 
 			foreach ($rules as $rule) {
@@ -67,7 +66,6 @@ class Validators{
 				$fn = 'is_' . $rule_name;
 				
 				if (is_callable([Validators::class, $fn])) {
-					
 					$pass = $this->$fn($data, $field, ...$params);
 					
 					// получить сообщение об ошибке для определенного поля и правила, если оно существует
@@ -81,7 +79,6 @@ class Validators{
 				}
 			}
 		}
-		
 		return $errors;
 	}
 
@@ -111,7 +108,6 @@ class Validators{
 		if (empty($data[$field])) {
 			return true;
 		}
-
 		return filter_var($data[$field], FILTER_VALIDATE_EMAIL);
 	}
 
@@ -129,7 +125,6 @@ class Validators{
 		if (!isset($data[$field])) {
 			return true;
 		}
-
 		return mb_strlen($data[$field]) >= $min;
 	}
 
@@ -147,7 +142,6 @@ class Validators{
 		if (!isset($data[$field])) {
 			return true;
 		}
-
 		return mb_strlen($data[$field]) <= $max;
 	}
 
@@ -166,7 +160,6 @@ class Validators{
 		if (!isset($data[$field])) {
 			return true;
 		}
-
 		$len = mb_strlen($data[$field]);
 		return $len >= $min && $len <= $max;
 	}
@@ -185,11 +178,9 @@ class Validators{
 		if (isset($data[$field], $data[$other])) {
 			return $data[$field] === $data[$other];
 		}
-
 		if (!isset($data[$field]) && !isset($data[$other])) {
 			return true;
 		}
-
 		return false;
 	}
 
@@ -206,7 +197,6 @@ class Validators{
 		if (!isset($data[$field])) {
 			return true;
 		}
-
 		return ctype_alnum($data[$field]);
 	}
 
@@ -223,7 +213,6 @@ class Validators{
 		if (!isset($data[$field])) {
 			return false;
 		}
-
 		$pattern = "#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#";
 		return preg_match($pattern, $data[$field]);
 	}
@@ -245,7 +234,6 @@ class Validators{
 		$stmt = $db->pdo->prepare($query);
 		$stmt->bindValue(":value", $data[$field]);
 		$stmt->execute();
-		
 		return $stmt->fetchColumn() === false;
 	}
 }

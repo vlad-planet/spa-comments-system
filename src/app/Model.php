@@ -66,7 +66,6 @@ Abstract class Model
 			$result = $stmt->execute($arrayData);
 
         } catch(PDOException $e) {
-			
             echo 'Error : '.$e->getMessage();
             return false;
         }
@@ -87,9 +86,7 @@ Abstract class Model
 		$employ = new Validators();
 
 		if (!$error = $employ->validate($data, $fields, $errors)) {
-
 			foreach($fields as $value => $key){
-				
 				if (property_exists($this, $value)) {
 					$this->$value = $data[$value];
 				}
@@ -108,7 +105,6 @@ Abstract class Model
 			$query = "SELECT * FROM $this->table ORDER BY id DESC";
 			$stmt = $this->db->query($query);
 			$rows =	$stmt->fetchAll(PDO::FETCH_ASSOC);
-			
 		}catch(PDOException $e) {
 			echo 'Error : '.$e->getMessage();
 			exit;

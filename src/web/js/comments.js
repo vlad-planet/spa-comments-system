@@ -31,21 +31,17 @@ let comn = new Vue({
 				// Ajax запрос на добавление коминтариев
 				axios.post('/comments/create', personForm)
 					.then(function(response) {
-						
 						comn.errors = [];
 						
 						// В случае успеха отобразить комментарий в списке
 						if (!response.data.error) {
-
 							comn.items.unshift(comn.comments);
 							comn.comments = {};
 							comn.errors.unshift({message: 'Comment posted Successfully.'});
 							comn.status = 'text-success';
-						
 						// Иначе вывести информацию обработчика полей
 						} else {
 							err = response.data.message;
-
 							Object.entries(err).forEach(function(entry) {
 								comn.errors.unshift({message: entry[1]});
 							});

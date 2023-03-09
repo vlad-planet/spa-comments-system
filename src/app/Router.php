@@ -14,8 +14,9 @@ class Router
 		$route =  null;
         
         if(($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false){
-        $route = substr($_SERVER['REQUEST_URI'], 0, $pos);
+			$route = substr($_SERVER['REQUEST_URI'], 0, $pos);
         }
+		
         $route = is_null($route) ? $_SERVER['REQUEST_URI'] : $route;
         $route = explode('/', $route);
         array_shift($route);

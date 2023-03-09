@@ -18,12 +18,10 @@ class CommentsController extends Controller
 		$model = new Comments();
 		$items = $model->getAll(); // получаем все строки
 		$info = $model->get_info();
-
 		$data = [
 			'items' => $items,
 			'info' => $info
 		];
-
 		$this->generate('comments/index.php', 'template.php', $data);
 	}
 
@@ -35,8 +33,7 @@ class CommentsController extends Controller
 	{
 		// Передаваеммые параметры
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$data = $_REQUEST;
-
+			$data   = $_REQUEST;
 			$model	= new Comments();
 			$fields = $model->rules();
 
@@ -45,7 +42,6 @@ class CommentsController extends Controller
 				
 				// Сохранение данных в таблицу БД
 				if ($model->save()) {
-
 					$status = array(
 						'error'  => 0
 					);
@@ -53,7 +49,7 @@ class CommentsController extends Controller
 					return false;
 				}
 			}
-
+			
 			// Статус об ошибке
 			$status = array(
 				'error'  => 1,
@@ -61,7 +57,6 @@ class CommentsController extends Controller
 			);
 			echo json_encode($status);
 		}
-		
 		return false;
 	}
 
@@ -72,16 +67,12 @@ class CommentsController extends Controller
 	public function actionItems() : void
 	{
 		$model = new Comments();
-		
 		$items = $model->getAll(); // получаем все строки
-
-		$data = [
+		$data  = [
 			'items' => $items
 		];
-
 		$this->generate('comments/items.php', '_blank.php', $data);
 	}
-	
 	
 	/**
      * Список комментариев для запроса Ajax Vue
@@ -89,9 +80,7 @@ class CommentsController extends Controller
 	public function actionAjax()
 	{
 		$model = new Comments();
-		
 		$items = $model->getAll();
-
 		echo (json_encode($items));
 	}
 	

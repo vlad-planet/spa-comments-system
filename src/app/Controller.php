@@ -12,7 +12,6 @@ class Controller
 	public function generate(string $content_view, string $template_view, array $data = null) : void
 	{
 		if (is_array($data)) {
-			
 			foreach( $data as $key => $val ){
 				extract($data[$key]);
 			}		

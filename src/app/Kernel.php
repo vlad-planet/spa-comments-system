@@ -19,7 +19,6 @@ class Kernel
 	 * @return void
      */
     public function launch() : void {
-		
         list($controllerName, $actionName, $params) = App::$router->resolve();
         echo $this->launchAction($controllerName, $actionName, $params);  
     }
